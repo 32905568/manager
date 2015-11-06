@@ -1,11 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <display-name>fensiquan</display-name>
-    <!-- ================================================================ -->
-    <!-- Listener Config                                                  -->
-    <!-- ================================================================ -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>manager_web</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loggingRoot</param-name>
+        <param-value>/home/admin/logs/manager</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loggingLevel</param-name>
+        <param-value>debug</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loggingCharset</param-name>
+        <param-value>gbk</param-value>
+    </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:/spring/spring-*.xml</param-value>
@@ -19,18 +32,13 @@
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
-    <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!-- ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest() -->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
-    <!-- ================================================================ -->
-    <!-- Filter Config                                                    -->
-    <!-- ================================================================ -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,28 +51,44 @@
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
-
-
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-     <!-- ================================================================ -->
-    <!-- Servlet Config                                                   -->
-    <!-- ================================================================ -->
+    <filter>
+        <filter-name>callbackFilter</filter-name>
+        <filter-class>com.muyu.manager.web.filter.JsonpCallbackFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>callbackFilter</filter-name>
+        <url-pattern>*.json</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>callbackFilter</filter-name>
+        <url-pattern>*.jsonp</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:/spring/servlet-context.xml</param-value>
+            <param-value>classpath*:/servlet-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>*.jsonp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
     <error-page>
@@ -79,4 +103,7 @@
         <error-code>500</error-code>
         <location>/500.html</location>
     </error-page>
+    <welcome-file-list>
+        <welcome-file>/login.html</welcome-file>
+    </welcome-file-list>
 </web-app>

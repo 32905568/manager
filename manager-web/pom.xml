@@ -4,15 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>manager</artifactId>
-        <groupId>org.muyu.manager</groupId>
+        <groupId>com.muyu.manager</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <version>${manager.version}</version>
     <artifactId>manager-web</artifactId>
     <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
     <build>
-        <finalName>fensiquan</finalName>
+        <finalName>manager</finalName>
         <filters>
             <filter>../antx.properties</filter>
         </filters>
@@ -23,32 +24,13 @@
             </resource>
         </resources>
         <plugins>
-           <!-- <plugin>
-                <groupId>com.alibaba.citrus.tool</groupId>
-                <artifactId>autoconfig-maven-plugin</artifactId>
-                <version>1.2</version>
-                <configuration>
-                    <strict>false</strict>
-                    <exploding>false</exploding>
-                    &lt;!&ndash;请放心使用这个不会影响Aone上打包的&ndash;&gt;
-                    <dest>${project.build.directory}/exploded/fensiquan.war</dest>
-                    <userProperties>../antx.properties</userProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>autoconfig</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
+
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>fensiquan</warName>
-                    <webappDirectory>target/exploded/fensiquan.war</webappDirectory>
+                    <warName>manager</warName>
+                    <webappDirectory>target/manager-web</webappDirectory>
                     <webResources>
                         <webResource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -72,4 +54,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.muyu.manager</groupId>
+            <artifactId>manager-biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>velocity-tools</groupId>
+            <artifactId>velocity-tools-view</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+        </dependency>
+    </dependencies>
 </project>
