@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * Created by maowei on 2015/11/6.
  */
-@Controller("/")
+@Controller("/p")
 public class VmController {
-    @RequestMapping("/{name}.html")
+    @RequestMapping("/{name}")
     public String vm(@PathVariable String name) {
         return "/" + name;
     }
-    @RequestMapping("/{path}/{name}.html")
+    @RequestMapping("/{path}/{name}")
     public String vm(@PathVariable String path,@PathVariable String name) {
         return "/" + path + "/" + name;
     }
-    @RequestMapping("/{module}/{path}/{name}.html")
+    @RequestMapping("/{module}/{path}/{name}")
     public String vm(@PathVariable String module,@PathVariable String path,@PathVariable String name) {
         return "/" + module +"/" + path + "/" + name;
     }

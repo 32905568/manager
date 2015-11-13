@@ -94,7 +94,6 @@ public abstract class EncodeUtils {
 	}
 
 	private static long alphabetDecode(String str, int base) {
-		AssertUtils.hasText(str);
 
 		long result = 0;
 		for (int i = 0; i < str.length(); i++) {

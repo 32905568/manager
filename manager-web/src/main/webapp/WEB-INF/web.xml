@@ -2,11 +2,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-    <display-name>fensiquan</display-name>
-    <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>manager_web</param-value>
-    </context-param>
+    <display-name>manager</display-name>
     <context-param>
         <param-name>loggingRoot</param-name>
         <param-value>/home/admin/logs/manager</param-value>
@@ -28,7 +24,9 @@
         <param-value>WEB-INF/log4j.xml</param-value>
     </context-param>
 
-
+    <listener>
+        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+    </listener>
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
@@ -39,6 +37,78 @@
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
+    <!-- 该过滤器用于实现单点登出功能，可选配置。 -->
+    <!--<filter>
+        <filter-name>CASSignOutFilter</filter-name>
+        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>https://sso.muyu.com:8443/cas/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>https://manager.muyu.com:8443</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CASSignOutFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+    <!--<filter>
+        <filter-name>CASServletWrapperFilter</filter-name>
+        <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CASServletWrapperFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <!-- 该过滤器负责用户的认证工作，必须启用它 -->
+    <!--<filter>
+        <filter-name>CASFilter</filter-name>
+        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>casServerLoginUrl</param-name>
+            <param-value>https://sso.muyu.com:8443/cas/login</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>https://manager.muyu.com:8443</param-value>
+        </init-param>
+    </filter>-->
+    <!--<filter-mapping>
+        <filter-name>CASFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+    <!-- 该过滤器负责对Ticket的校验工作，必须启用它 -->
+    <!--<filter>
+        <filter-name>CASValidationFilter</filter-name>
+        <filter-class>
+            org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter
+        </filter-class>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>http//sso.muyu.com:8443/cas/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>https://manager.muyu.com:8443</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CASValidationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <!--<filter>
+         <filter-name>CASThreadLocalFilter</filter-name>
+         <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
+     </filter>
+     <filter-mapping>
+         <filter-name>CASThreadLocalFilter</filter-name>
+         <url-pattern>/*</url-pattern>
+     </filter-mapping>
+ -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -55,6 +125,7 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+<!--
 
     <filter>
         <filter-name>callbackFilter</filter-name>
@@ -68,6 +139,7 @@
         <filter-name>callbackFilter</filter-name>
         <url-pattern>*.jsonp</url-pattern>
     </filter-mapping>
+-->
 
     <servlet>
         <servlet-name>appServlet</servlet-name>
@@ -80,16 +152,17 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
-        <url-pattern>*.json</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
-        <url-pattern>*.jsonp</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
 
     <error-page>
         <error-code>403</error-code>
@@ -106,4 +179,21 @@
     <welcome-file-list>
         <welcome-file>/login.html</welcome-file>
     </welcome-file-list>
+
+<!--
+    <login-config>
+        &lt;!&ndash; Authorization setting for SSL &ndash;&gt;
+        <auth-method>CLIENT-CERT</auth-method>
+        <realm-name>Client Cert Users-only Area</realm-name>
+    </login-config>
+    <security-constraint>
+        &lt;!&ndash; Authorization setting for SSL &ndash;&gt;
+        <web-resource-collection>
+            <web-resource-name>SSL</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
 </web-app>

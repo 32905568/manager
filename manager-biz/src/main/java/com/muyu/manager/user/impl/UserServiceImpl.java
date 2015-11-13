@@ -1,6 +1,8 @@
 package com.muyu.manager.user.impl;
 
 import com.muyu.manager.user.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,8 +10,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService{
+    public static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     @Override
     public void test() {
-        System.out.println(111+":test");
+        LOGGER.warn(111+":test");
     }
 }

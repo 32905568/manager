@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.muyu.core.config.Constants;
-import com.muyu.core.utils.AssertUtils;
 import com.muyu.core.utils.EncodeUtils;
 import com.muyu.core.utils.FileUtils;
 
@@ -149,7 +148,6 @@ public abstract class ServletUtils {
 	 * 返回的结果的Parameter名已去除前缀.
 	 */
 	public static Map<String, Object> getParametersStartingWith(ServletRequest request, String prefix) {
-		AssertUtils.notNull(request, "Request must not be null");
 		Enumeration paramNames = request.getParameterNames();
 		Map<String, Object> params = new TreeMap<String, Object>();
 		if (prefix == null) {
