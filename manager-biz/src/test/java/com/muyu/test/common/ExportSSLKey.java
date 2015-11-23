@@ -63,11 +63,11 @@ public class ExportSSLKey {
 
 
         public static void main(String args[]) throws Exception{
-            String file = "D:/tools/server/apache-tomcat-7.0.61/server.keystore";
-            String type = "JKS";
+            String file = "D:/tools/nginx-1.5.1/server.keystore";
+            String type = "pfx";
             String password = "changeit";
             String alias = "tomcat";
-            String fileExpt = "D:/tools/server/apache-tomcat-7.0.61/server5";
+            String fileExpt = "D:/tools/nginx-1.5.1/server6.pfx";
             ExportSSLKey export=new ExportSSLKey();
             export.keystoreFile=new File(file);
             export.keyStoreType=type;
