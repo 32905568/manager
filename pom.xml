@@ -21,7 +21,6 @@
         <spring.version>4.1.1.RELEASE</spring.version>
         <druid.version>1.0.11</druid.version>
         <slf4j.version>1.7.2</slf4j.version>
-        <cas.client.version>3.4.1</cas.client.version>
     </properties>
 
     <dependencies>
@@ -287,16 +286,6 @@
                 <groupId>commons-digester</groupId>
                 <artifactId>commons-digester</artifactId>
                 <version>1.5</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jasig.cas.client</groupId>
-                <artifactId>cas-client-core</artifactId>
-                <version>${cas.client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jasig.cas.client</groupId>
-                <artifactId>cas-client-integration-tomcat-v7</artifactId>
-                <version>${cas.client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

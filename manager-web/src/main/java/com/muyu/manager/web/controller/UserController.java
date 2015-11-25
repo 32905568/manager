@@ -1,10 +1,8 @@
 package com.muyu.manager.web.controller;
 
 import com.muyu.manager.user.UserService;
-import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,8 +35,7 @@ public class UserController {
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("user","muyu");
         map.put("id","1234");
-        AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
-        map.put("authInfo",principal);
+
         return map;
     }
 
