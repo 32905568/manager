@@ -30,9 +30,6 @@
                 </property>
                 <property name="features">
                     <list>
-                        <value>QuoteFieldNames</value>
-                        <value>WriteMapNullValue</value>
-                        <value>WriteNullBooleanAsFalse</value>
                         <value>WriteNullNumberAsZero</value>
                         <value>WriteNullStringAsEmpty</value>
                         <value>WriteNullListAsEmpty</value>
@@ -41,6 +38,20 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**/*"/>
+            <mvc:mapping path="/rest/**/*"/>
+            <bean class="com.muyu.manager.web.interceptor.ContextMergeInterceptor">
+            </bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.muyu.manager.web.interceptor.CSRFSecurityInterceptor" init-method="init"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- velocity引擎 -->
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
