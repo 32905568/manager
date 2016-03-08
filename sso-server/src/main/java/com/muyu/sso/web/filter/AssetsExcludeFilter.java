@@ -1,4 +1,4 @@
-package com.muyu.manager.web.filter;
+package com.muyu.sso.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

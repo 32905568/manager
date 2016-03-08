@@ -15,14 +15,13 @@ import java.util.Map;
  * Created by maowei on 2015/11/5.
  */
 @RestController
-@RequestMapping("/api")
 public class UserController {
     @Resource
     UserService userService;
 
-    @RequestMapping("/test")
+    @RequestMapping("/test1")
     public Map<String,String> test() {
-        userService.test();
+        System.out.println("--------------");
         Map<String,String> map = new HashMap<String,String>();
         map.put("user","muyu");
         map.put("id","1234");
@@ -31,17 +30,14 @@ public class UserController {
 
     @RequestMapping("/index")
     public Map<String,Object> index(HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-        userService.test();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("user","muyu");
         map.put("id","1234");
-
         return map;
     }
 
     @RequestMapping("/logout")
     public Map<String,String> logout() {
-        userService.test();
         Map<String,String> map = new HashMap<String,String>();
         map.put("user","muyu");
         map.put("id","1234");

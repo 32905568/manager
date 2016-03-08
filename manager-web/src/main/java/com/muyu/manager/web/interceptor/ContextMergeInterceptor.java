@@ -64,12 +64,6 @@ public class ContextMergeInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
             throws Exception {
-        if (modelAndView == null
-                || StringUtils.startsWithIgnoreCase(modelAndView.getViewName(), "redirect:")
-                || (modelAndView.getView() != null && modelAndView.getView() instanceof RedirectView)) {
-            return;
-        }
-
     }
     private boolean isWhiteUrl(String url){
         return false;

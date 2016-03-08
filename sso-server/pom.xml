@@ -8,10 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${manager.version}</version>
-    <artifactId>manager-web</artifactId>
     <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+    <artifactId>sso-server</artifactId>
+
     <build>
         <finalName>manager</finalName>
         <filters>
@@ -30,7 +29,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <warName>manager</warName>
-                    <webappDirectory>D:\dev\dev-tool\apache-tomcat-8.0.29x64\webapps\ROOT</webappDirectory>
                     <webResources>
                         <webResource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>

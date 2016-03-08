@@ -24,13 +24,4 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/api/**/*"/>
-            <mvc:mapping path="/rest/**/*"/>
-            <bean class="com.muyu.manager.web.interceptor.ContextMergeInterceptor">
-            </bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
 </beans>
